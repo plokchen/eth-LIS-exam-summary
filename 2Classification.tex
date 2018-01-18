@@ -1,0 +1,50 @@
+% -*- root: Main.tex -*-
+\section*{Classification}
+\subsection*{0/1 loss}
+0/1 loss is not convex and not differentiable.\\
+$l_{0/1} (w,y_i,x_i) = \left\{
+	\begin{array}{lr}
+		0 \text{ , if } y_i = sign(w^Tx_i)\\
+		1 \text{ , otherwise} 
+	\end{array}$
+
+\subsection*{Perceptron loss}
+Perceptron loss is convex and not differentiable, but gradient is informative.\\
+$l_{P} (w,y_i,x_i) = max\{0, -y_i w^T x_i \}$
+
+\subsection*{Stochastic Gradient Descent}
+1. Start arbitrary $w_0 \in \mathbb{R}^d$\\
+2. For $t$ do: \\
+	Pick data point $(x_1,y_1) \in_{u.a.r.} D$\\
+	$w_{t+1} = w_t - \eta_t \nabla l(w_t,x_1,y_1)$
+
+\subsection*{Perceptron Algorithm}
+Stochastic Gradient + Perceptron loss\\
+
+\emph{Theorem:} If $D$ is linearly seperable $\Rightarrow$ Perceptron will obtain a linear seperator.
+
+\subsection*{Support Vector Machine}
+Try to maximize a ``band'' around the seperator.\\
+Error: $\hat{R}(w) = \sum_{i=1}^n \max \{0,1-y_i w^T x_i\} + \lambda ||w||_2^2$\\
+$= \max \{0,1-y^T X w\} + \lambda ||w||_2^2$\\
+Gradient: $\nabla_w \hat{R}(w) = \left\{
+	\begin{array}{lr}
+		-X^Ty + 2\lambda w \text{ , if $y_iw^Tx_i<1$}\\
+		2\lambda w \text{, otherwise}
+	\end{array}$
+
+\subsection*{Matrix-Vector Gradient}
+%multiply transposed matrix to the same side as its occurance w.r.t. derivate variable: $\beta \in \mathbb{R}^d$
+$\nabla_\beta ( ||y-X\beta||_2^2 + \lambda ||\beta||_2^2 ) = 2X^T (y-X\beta) + 2\lambda \beta$\\
+
+\subsection*{Hinge loss}
+loss for support vector machine.\\
+$l_{SVM}(w,x_i,y_i) = \max \{0,1-y_iw^Tx_i\} + \lambda ||w||_2^2$\\
+derivation:\\
+$\frac{\partial}{\partial w_k} l_{SVM}(w,y_i,x_i) = \left \{
+	\begin{array}{lr}
+		0 \text{ ,} 1-y_iw^Tx_i<0 \\
+		-y_ix_{i,k} \text{ , otherwise}
+	\end{array}
+	+ 2\lambda w_k
+$

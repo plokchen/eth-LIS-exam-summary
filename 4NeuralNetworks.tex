@@ -1,0 +1,14 @@
+% -*- root: Main.tex -*-
+\section*{Neural Networks}
+\subsection*{Learning features}
+Parameterize the feature maps and optimize over the parameters:\\
+$w^* = \underset{w, \Theta}{\operatorname{argmin}}$ \sum_{i=1}^n l(y_i, \sum_{j=1}^m w_j \Phi(x_i, \Theta_j))$
+
+\subsection*{Backpropagation}
+For each unit $j$ on the output layer:\\
+- Compute error signal: $\delta_j = \ell_j'(f_j)$\\
+- For each unit $i$ on layer $L$: $\frac{\partial}{\partial w_{j,i}} = \delta_j v_i$
+
+For each unit $j$ on hidden layer $l=\{L-1,..,1\}$:\\
+- Error signal: $\delta_j = \phi'(z_j) \sum_{i\in Layer_{l+1}} w_{i,j}\delta_i$\\
+- For each unit $i$ on layer $l-1$: $\frac{\partial}{\partial w_{j,i}} = \delta_j v_i$
